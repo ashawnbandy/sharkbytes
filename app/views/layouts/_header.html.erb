@@ -1,0 +1,20 @@
+    <header class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <%= link_to image_tag("logo.png", alt: "Shark Bytes", size: "60x22") + "Shark Bytes", root_path, class: "brand" %>
+          <nav>
+            <ul class="nav pull-right">
+              <% if user_signed_in? %>
+                <li class="divider-vertical"></li>
+                <li><%= link_to "Home", root_path %></li>
+                <li class="divider-vertical"></li>
+                <li><%= link_to "Sharks", sharks_path %></li>
+                <li class="divider-vertical"></li>
+                <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+                <li class="divider-vertical"></li>
+              <% end %>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>

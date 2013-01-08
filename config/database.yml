@@ -1,0 +1,22 @@
+development:
+  adapter: postgresql
+  database: sharkbytes_dev
+  pool: 5
+  timeout: 5000
+  username:
+  password:
+
+test: &TEST
+  adapter: postgresql
+  database: sharkbytes_test
+  pool: 5
+  timeout: 5000
+  username:
+  password:
+
+# This is, I think, completely ignored with Heroku.
+production:
+  adapter: sqlite3
+  database: db/production.sqlite3
+  pool: 5
+  timeout: 5000

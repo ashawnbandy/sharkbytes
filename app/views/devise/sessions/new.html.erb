@@ -1,0 +1,29 @@
+<% provide(:title, 'Log In') %>
+<div class="center well-outer splash-logo-block">
+  <h1>Shark Bytes</h1>
+  <%= image_tag "logo.png", alt:"Shark Bytes logo, poorly drawn white shark" %>
+  <p>Data management for the CSULB shark lab.</p>
+</div>
+
+
+<div class="well-outer splash-signin-block">
+  <div class="well-inner">
+    <h2>Sign in</h2>
+    <div>
+      <%= form_for(resource, as: resource_name, url: user_session_path, html: {
+        class: "form-inline"
+      }) do |f| %>
+        <p><%= f.text_field :email, placeholder: "Email", autofocus: true, tabindex: autotab %></p>
+        <p><%= f.password_field :password, placeholder: "Password", tabindex: autotab %></p>
+        <p>
+          <%= f.submit 'Sign in', class:"btn btn-primary btn-large", tabindex: autotab %>
+          <%= f.hidden_field :remember_me, id: 'remember_field' %>
+          <%= f.submit 'Remember me', id: 'remember_button', class:"btn btn-large btn-info pull-right", tabindex: autotab %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+

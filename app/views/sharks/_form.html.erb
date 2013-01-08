@@ -1,0 +1,336 @@
+<%= form_for(@shark, html: {class: "form-horizontal"}) do |f| %>
+  <% if @shark.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@shark.errors.count, "error") %> prohibited this shark from being saved:</h2>
+
+      <ul>
+      <% @shark.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+
+    <legend>1: General Information</legend>
+
+    <div class="control-group">
+      <%= f.label :idnumber, "ID Number", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :idnumber, class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :origination_entry, "Originating Entry", class:"control-label" %>
+      <div class="controls">
+        <%= collection_select :shark, :origination_entry, @all_sharks, :id, :idnumber, include_blank: "No Originating Entry (New Specimen)" %>
+      </div>
+    </div>
+
+  </fieldset>
+  <fieldset>
+
+    <legend>2: Catch Details</legend>
+
+    <div class="control-group">
+      <%= f.label :date_landed, "Date Landed (in UTC)", class:"control-label" %>
+      <div class="controls">
+        <%= datetime_select :shark, :date_landed, include_blank: "No Recorded Date", start_year:2006 %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :condition, "Condition", class:"control-label" %>
+      <div class="controls">
+        <%= select :shark, :condition, @shark.condition_choices, include_blank: "No Recorded Condition" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :catch_latitude, "Catch Latitude", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :catch_latitude, value: number_with_precision(f.object.catch_latitude, precision: 10), placeholder: "Decimal Degrees, eg. -112.3456789", class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :catch_longitude, "Catch Longitude", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :catch_longitude, value: number_with_precision(f.object.catch_longitude, precision: 10), placeholder: "Decimal Degrees, eg. 12.3456789", class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :taggers, "Taggers", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_area :taggers, placeholder: "Names seperated by a comma and a space", class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :fisherman, "Fisherman", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :fisherman, placeholder: "Or Fisherperson!", class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :boat_name, "Boat Name", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :boat_name, placeholder: "Boat (vessel) name", class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :net_type, "Net Type", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :net_type, placeholder: "eg. 'Set gillnet', 'Hook and line', etc.", class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :fishing_capture_details, "Capture Details", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_area :fishing_capture_details, placeholder: "eg. Soak time, general fishing area, target species, etc.", class:"input-xlarge" %>
+      </div>
+    </div>
+
+  </fieldset>
+  <fieldset>
+    <legend>3: Release Details</legend>
+
+    <div class="control-group">
+      <%= f.label :release_latitude, "Release Latitude", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :release_latitude, value: number_with_precision(f.object.release_latitude, precision: 10), placeholder: "Decimal Degrees, eg. -112.3456789", class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :release_longitude, "Release Longitude", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :release_longitude, value: number_with_precision(f.object.release_longitude, precision: 10), placeholder: "Decimal Degrees, eg. -112.3456789", class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :release_details, "Release Details", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_area :release_details, placeholder: "eg. Description of shark upon release", class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :release_date, "Release Date", class:"control-label" %>
+      <div class="controls">
+        <%= datetime_select :shark, :release_date, include_blank: "No Recorded Date", start_year:2006 %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :initial_release_disposition, "Initial Release Disposition", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :initial_release_disposition, placeholder: "eg. 'Released to wild', 'Sea pen', 'MBA exhibit', etc.", class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :release_sst, "Release Subsurface Temp (SST)", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :release_sst, value: number_with_precision(f.object.release_sst, precision: 15), placeholder: "In Celsius, eg. 17.5", class:"input-xlarge" %>
+      </div>
+    </div>
+
+  </fieldset>
+  <fieldset>
+
+    <legend>4: Core Morphology</legend>
+
+    <div class="control-group">
+      <%= f.label :sex, "Sex", class:"control-label" %>
+      <div class="controls">
+        <%= select :shark, :sex, @shark.sex_choices, include_blank: "Unknown" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :total_length, "Total Length", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :total_length, value: number_with_precision(f.object.total_length, precision:15), placeholder: "cm", class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :fork_length, "Fork Length", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :fork_length, value: number_with_precision(f.object.total_length, precision:15), placeholder: "cm", class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :precaudal_length, "Precaudal Length", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :precaudal_length, value: number_with_precision(f.object.total_length, precision:15), placeholder: "cm", class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :girth, "Girth", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :girth, value: number_with_precision(f.object.total_length, precision:15), placeholder: "cm", class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :mass, "Mass", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :mass, value: number_with_precision(f.object.total_length, precision:15), placeholder: "kg", class:"input-xlarge" %>
+      </div>
+    </div>
+
+  </fieldset>
+  <fieldset>
+    <legend>5: Tag Details</legend>
+
+    <div class="control-group">
+      <%= f.label :pat_ppt_number, "PAT PPT Number", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :pat_ppt_number, class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :pat_tether_number, "PAT Tether Number", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :pat_tether_number, class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :pat_loop_number, "PAT Loop Number", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :pat_loop_number, class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :pat_release_date, "PAT Release Date", class:"control-label" %>
+      <div class="controls">
+        <%= datetime_select :shark, :pat_release_date, include_blank: "No Recorded Date", start_year:2006 %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :acoustic_code_id, "Acoustic Tag Code ID", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :acoustic_code_id, class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :acoustic_serial_number, "Acoustic Tag Serial Number", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :acoustic_serial_number, class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :acoustic_shutdown_date, "Acoustic Tag Shutdown Date", class:"control-label" %>
+      <div class="controls">
+        <%= datetime_select :shark, :acoustic_shutdown_date, include_blank: "No Recorded Date", start_year:2006 %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :spot_ppt_number, "SPOT PPT Number", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :spot_ppt_number, class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :archival_dst_number, "Archival DST Number", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :archival_dst_number, class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :other_tag_details, "Other Tag Details", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_area :other_tag_details, class:"input-xlarge" %>
+      </div>
+    </div>
+
+  </fieldset>
+  <fieldset>
+
+    <legend>6: Procedure Details</legend>
+
+    <div class="control-group">
+      <%= f.label :dna, "DNA", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :dna, class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :blood_drawn, "Blood Drawn (Volume)", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :blood_drawn, value: number_with_precision(f.object.blood_drawn, precision:15), placeholder: "in mL, eg. '63.5'", class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :tetracycline, "Tetracycline Administered", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_field :tetracycline, value: number_with_precision(f.object.tetracycline, precision:15), placeholder: "in mL, eg. '63.5'", class:"input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :eye_stain, "Eye Stain?", class:"control-label" %>
+      <div class="controls">
+        <%= f.check_box :eye_stain %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :procedure_notes, "Procedure Notes", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_area :procedure_notes, class:"input-xlarge" %>
+      </div>
+    </div>
+
+  </fieldset>
+  <fieldset>
+
+    <legend>7: Miscellaneous</legend>
+
+    <div class="control-group">
+      <%= f.label :comments, "Comments", class:"control-label" %>
+      <div class="controls">
+        <%= f.text_area :comments, class:"input-xlarge" %>
+      </div>
+    </div>
+
+  </fieldset>
+
+
+
+  <fieldset>
+    <legend>Actions</legend>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  </fieldset>
+<% end %>
+
+
+
+
+
+
+

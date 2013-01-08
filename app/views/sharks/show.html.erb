@@ -1,0 +1,202 @@
+<% provide(:title, @shark.idnumber) %>
+<div class='well'>
+  <p id="notice"><%= notice %></p>
+
+  <h1>Shark: <%= @shark.idnumber %></h1>
+
+  <table class='table table-bordered table-striped'>
+    <!-- gogo magic html5! Isn't this much nicer without closing everything? -->
+    <thead>
+      <tr>
+        <th>Property
+        <th>Value
+
+    <tbody>
+      <tr>
+        <td>ID Number
+        <td><%= @shark.idnumber %>
+
+      <tr>
+        <td>Origination Entry
+        <td><% if @shark.has_origin? %><%= @shark.originator.idnumber %><% end %>
+
+      <tr>
+        <th colspan="2">Catch Details
+
+      <tr>
+        <td>Date Landed
+        <td><%= @shark.date_landed.presence || "" %>
+
+      <tr>
+        <td>Condition
+        <td><%= @shark.condition.presence || "" %>
+
+      <tr>
+        <td>Catch Latitude
+        <td><%= @shark.catch_latitude.presence || "" %>
+
+      <tr>
+        <td>Catch Longitude
+        <td><%= @shark.catch_longitude.presence || "" %>
+
+      <tr>
+        <td>Taggers
+        <td><%= @shark.taggers.presence || "" %>
+
+      <tr>
+        <td>Fisherman <!-- Apologies to all female skippers. :( -->
+        <td><%= @shark.fisherman.presence || "" %>
+
+      <tr>
+        <td>Boat Name
+        <td><%= @shark.boat_name.presence || "" %>
+
+      <tr>
+        <td>Net Type
+        <td><%= @shark.net_type.presence || "" %>
+
+      <tr>
+        <td>Fishing Capture Details
+        <td><%= @shark.fishing_capture_details.presence || "" %>
+
+      <tr>
+        <td>Release Latitude
+        <td><%= @shark.release_latitude.presence || "" %>
+
+      <tr>
+        <td>Release Longitude
+        <td><%= @shark.release_longitude.presence || "" %>
+
+      <tr>
+        <td>Release Details
+        <td><%= @shark.release_details.presence || "" %>
+
+      <tr>
+        <td>Release Date
+        <td><%= @shark.release_date.presence || "" %>
+
+      <tr>
+        <td>Initial Release Disposition
+        <td><%= @shark.initial_release_disposition.presence || "" %>
+
+      <tr>
+        <td>Release Subsurface Temperature (SST)
+        <td><%= @shark.release_sst.presence || "" %>
+
+      <%# CORE MORPHOLOGY %>
+      <tr>
+        <th colspan="2">Core Morphology
+
+      <tr>
+        <td>Sex
+        <td><%= @shark.sex.presence || "" %>
+
+      <tr>
+        <td>Total Length (cm)
+        <td><%= @shark.total_length.presence || "" %>
+
+      <tr>
+        <td>Fork Length (cm)
+        <td><%= @shark.fork_length.presence || "" %>
+
+      <tr>
+        <td>Precaudal Length (cm)
+        <td><%= @shark.precaudal_length.presence || "" %>
+
+      <tr>
+        <td>Girth (cm)
+        <td><%= @shark.girth.presence || "" %>
+
+      <tr>
+        <td>Mass (kg)
+        <td><%= @shark.mass.presence || "" %>
+
+      <%# TAG DETAILS %>
+
+      <tr>
+        <th colspan="2">Tag Details
+
+      <tr>
+        <td>PAT ppt #
+        <td><%= @shark.pat_ppt_number.presence || "" %>
+
+      <tr>
+        <td>PAT tether #
+        <td><%= @shark.pat_tether_number.presence || "" %>
+
+      <tr>
+        <td>PAT loop #
+        <td><%= @shark.pat_loop_number.presence || "" %>
+
+      <tr>
+        <td>PAT release date
+        <td><%= @shark.pat_release_date.presence || "" %>
+
+      <tr>
+        <td>Acoustic tag Code ID
+        <td><%= @shark.acoustic_code_id.presence || "" %>
+
+      <tr>
+        <td>Acoustic tag serial #
+        <td><%= @shark.acoustic_serial_number.presence || "" %>
+
+      <tr>
+        <td>Acoustic Shutdown Date
+        <td><%= @shark.acoustic_shutdown_date.presence || "" %>
+
+      <tr>
+        <td>SPOT ppt #
+        <td><%= @shark.spot_ppt_number.presence || "" %>
+
+      <tr>
+        <td>Archival DST#
+        <td><%= @shark.archival_dst_number.presence || "" %>
+
+      <tr>
+        <td>Other Tag Details
+        <td><%= @shark.other_tag_details.presence || "" %>
+
+
+
+      <tr>
+        <th colspan="2">Procedure Details
+
+      <tr>
+        <td>DNA
+        <td><%= @shark.dna.presence || "" %>
+
+      <tr>
+        <td>Blood Drawn (volume in mL)
+        <td><%= @shark.blood_drawn.presence || "" %>
+
+      <tr>
+        <td>Tetracycline
+        <td><%= @shark.tetracycline.presence || "" %>
+
+      <tr>
+        <td>Eye Stain performed?
+        <td><%= @shark.eye_stain.presence ? "yes" : "no" %>
+
+      <tr>
+        <td>Procedure Notes
+        <td><%= @shark.procedure_notes.presence || "" %>
+
+
+
+      <tr>
+        <th colspan="2">Miscellaneous
+
+      <tr>
+        <td>Comments
+        <td><%= @shark.comments.presence || "" %>
+
+
+
+
+
+  </table>
+
+
+  <%= link_to 'Edit', edit_shark_path(@shark) %> |
+  <%= link_to 'Back', sharks_path %>
+</div>

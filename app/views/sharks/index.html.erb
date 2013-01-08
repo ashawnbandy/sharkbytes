@@ -1,0 +1,33 @@
+<% provide(:title,"Sharks") %>
+<div class='well-outer'>
+
+  <div class='well-inner'>
+    <h1>Listing sharks</h1>
+  </div>
+
+  <div class='well-inner'>
+    <table class='table table-bordered table-striped'>
+      <tr>
+        <th>ID Number</th>
+        <th><!-- Show link --></th>
+        <th><!-- Edit link --></th>
+        <th><!-- Destroy link --></th>
+      </tr>
+
+    <% @sharks.each do |shark| %>
+      <tr>
+        <td><%= shark.idnumber %></td>
+        <td><%= link_to 'Show', shark %></td>
+        <td><%= link_to 'Edit', edit_shark_path(shark) %></td>
+        <td><%= link_to 'Destroy', shark, confirm: 'Are you sure?', method: :delete %></td>
+      </tr>
+    <% end %>
+    </table>
+  </div>
+
+
+  <div class='well-inner'>
+    <h2>Actions</h2>
+    <%= link_to 'New Shark', new_shark_path %>
+  </div>
+</div>
