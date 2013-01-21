@@ -9,7 +9,7 @@ gem 'bcrypt-ruby', '3.0.1'
 gem 'foreman'
 gem 'devise', '>= 1.1.0'
 gem 'bootstrap-sass'
-
+gem 'therubyracer'
 group :production do
 
 end
